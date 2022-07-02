@@ -8,9 +8,10 @@ import checkAuth from './checkAuth.js';
 
 import * as userControler from './controllers/userControler.js';
 import * as postControler from './controllers/postControler.js';
-const port = process.env.PORT || 4444;
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(
+    'mongodb+srv://reinjeri:reinjeri@cluster0.3tuvt.mongodb.net/blog?retryWrites=true&w=majority',
+  )
   .then(() => console.log('DB OK'))
   .catch((err) => console.log('DB error', err));
 
@@ -43,7 +44,7 @@ app.patch('/posts/:id', checkAuth, postControler.update);
 
 app.get('/tags', postControler.getTags);
 
-app.listen(port, (err) => {
+app.listen(4444, (err) => {
   if (err) {
     return console.log(err);
   }
