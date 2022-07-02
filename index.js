@@ -9,9 +9,7 @@ import checkAuth from './checkAuth.js';
 import * as userControler from './controllers/userControler.js';
 import * as postControler from './controllers/postControler.js';
 mongoose
-  .connect(
-    'mongodb+srv://reinjeri:reinjeri@cluster0.3tuvt.mongodb.net/blog?retryWrites=true&w=majority',
-  )
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DB OK'))
   .catch((err) => console.log('DB error', err));
 
@@ -44,7 +42,7 @@ app.patch('/posts/:id', checkAuth, postControler.update);
 
 app.get('/tags', postControler.getTags);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   }
